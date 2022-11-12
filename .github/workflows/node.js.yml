@@ -25,9 +25,16 @@ jobs:
         run: |
           npm ci
           npm run build
-          
+      
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages # branch the action should deploy to.
-          folder: build # The folder the action should deploy.
+        run: |
+          git config --global user.name 'Kazim Asif'
+          git config --global user.email 'kazimasif2020@gmail.com'
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          npm run deploy
+
+      # - name: Deploy
+      #   uses: JamesIves/github-pages-deploy-action@v4
+      #   with:
+      #     branch: gh-pages # branch the action should deploy to.
+      #     folder: build # The folder the action should deploy.
